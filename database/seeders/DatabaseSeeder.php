@@ -2,22 +2,30 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
-    public function run(): void
+    public function run()
     {
-        // User::factory(10)->create();
+        // Nonaktifkan foreign key check
+        Schema::disableForeignKeyConstraints();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        // Kosongkan tabel dengan DB facade untuk menghindari model events
+        DB::table('detail_periksa')->truncate();
+        DB::table('periksa')->truncate();
+        DB::table('obat')->truncate();
+        DB::table('users')->truncate();
+
+        // Aktifkan kembali foreign key check
+        Schema::enableForeignKeyConstraints();
+
+        // Jalankan seeder
+        $this->call([
+            UsersTableSeeder::class,
+            ObatTableSeeder::class,
         ]);
     }
 }
