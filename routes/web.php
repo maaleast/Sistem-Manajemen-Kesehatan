@@ -9,9 +9,7 @@ use App\Http\Controllers\ObatController;
 use App\Http\Controllers\PasienPeriksaController;
 use App\Models\User; 
 
-// ===============================
-// 🌐 ROUTE UTAMA & DASHBOARD
-// ===============================
+//UTAMA
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,9 +19,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// ===============================
-// 🔐 AUTH & PROFILE
-// ===============================
+//LOGIN DAFTAR
 require __DIR__.'/auth.php';
 
 Auth::routes();
@@ -34,9 +30,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// ===============================
-// 🧑‍⚕️ DOKTER ROUTES
-// ===============================
+//DOKTER
 Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->group(function () {
     // Dashboard Dokter
     Route::get('/dashboard', function () {
@@ -52,9 +46,7 @@ Route::middleware(['auth', 'role:dokter'])->prefix('dokter')->name('dokter.')->g
     Route::resource('obat', ObatController::class)->except(['show']);
 });
 
-// ===============================
-// 🧑‍💼 PASIEN ROUTES
-// ===============================
+//PASIEN
 Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->name('pasien.')->group(function () {
     // Dashboard Pasien
     Route::get('/dashboard', function () {
