@@ -3,9 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Halaman Periksa</title>
+        <title>Periksa</title>
     </head>
     <body>
-        <h1>Ini halaman index periksa</h1>
+        <h1>Buat periksa</h1>
     </body>
 </html>
