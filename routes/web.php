@@ -20,7 +20,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 //LOGIN DAFTAR
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';
 
 Auth::routes();
 
@@ -68,4 +68,17 @@ Route::middleware(['auth', 'role:pasien'])->prefix('pasien')->name('pasien.')->g
 
     //halaman detail pemeriksaan
     Route::get('/riwayat/{id}', [PasienPeriksaController::class, 'detail'])->name('periksa.detail');
+});
+
+
+Route::get('/test-register', function() {
+    $user = App\Models\User::create([
+        'nama' => 'Test User',
+        'email' => 'test@example.com',
+        'password' => bcrypt('password'),
+        'alamat' => 'Test Alamat',
+        'no_hp' => '1234567890',
+        'role' => 'pasien'
+    ]);
+    return $user;
 });
